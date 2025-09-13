@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Library Study Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+</head>
+<body class="gradient-bg min-h-screen">
+  <div class="container mx-auto px-4 py-8">
+
+    <!-- Header -->
+    <header class="text-center mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
+        <i class="fas fa-book-reader mr-3"></i> Library Study Tracker
+      </h1>
+      <p id="current-time" class="text-xl text-white/90"></p>
+    </header>
+
+    <!-- Current Session -->
+    <div class="bg-white rounded-xl card-shadow p-6 mb-8 fade-in">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
+        <i class="fas fa-clock mr-3 text-blue-600"></i> Current Session
+      </h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <!-- Controls -->
+        <div class="space-y-4">
+          <div class="flex items-center space-x-4">
+            <button id="checkInBtn" class="btn-green"><i class="fas fa-sign-in-alt mr-2"></i>Check In</button>
+            <button id="checkOutBtn" class="btn-red" disabled><i class="fas fa-sign-out-alt mr-2"></i>Check Out</button>
+          </div>
+          <div id="currentStatus" class="status-box">
+            <p class="text-lg text-center text-gray-600">No active session</p>
+          </div>
+        </div>
+
+        <!-- Timer -->
+        <div class="bg-blue-50 p-6 rounded-lg flex flex-col justify-center">
+          <h3 class="text-lg font-semibold text-blue-800 mb-4 text-center"><i class="fas fa-stopwatch mr-2"></i> Session Duration</h3>
+          <div class="text-center">
+            <div id="timerDisplay" class="timer">00:00:00</div>
+            <p class="text-sm text-blue-700">Time spent studying</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="grid md:grid-cols-3 gap-6 mb-8">
+      <div class="stats-card"><i class="fas fa-calendar-day text-blue-600"></i><h3>Today's Study</h3><p id="todayStudy">0h 0m</p></div>
+      <div class="stats-card"><i class="fas fa-calendar-week text-green-600"></i><h3>This Week</h3><p id="weekStudy">0h 0m</p></div>
+      <div class="stats-card"><i class="fas fa-chart-line text-purple-600"></i><h3>All Time</h3><p id="totalStudy">0h 0m</p></div>
+    </div>
+
+    <!-- Session History -->
+    <div class="bg-white rounded-xl card-shadow p-6 mb-8">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-semibold text-gray-800 flex items-center"><i class="fas fa-history mr-3"></i> Session History</h2>
+        <button id="exportBtn" class="btn-gray"><i class="fas fa-download mr-2"></i>Export CSV</button>
+      </div>
+      <div class="overflow-x-auto max-h-96">
+        <table class="w-full table-auto border-collapse">
+          <thead>
+            <tr class="bg-gray-50 border-b">
+              <th>Date</th><th>Entry</th><th>Exit</th><th>Duration</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="sessionsList"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Goal Progress -->
+    <div class="bg-white rounded-xl card-shadow p-6">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6 flex items-center"><i class="fas fa-chart-pie mr-3 text-purple-600"></i> Productivity Insights</h2>
+      <div>
+        <div class="flex justify-between text-sm text-gray-600 mb-2"><span>Daily Goal (4 hours)</span><span id="goalProgress">0%</span></div>
+        <div class="w-full bg-gray-200 rounded-full h-3"><div id="goalBar" class="bg-green-500 h-3 rounded-full progress-bar" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notifications -->
+  <div id="notificationContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
